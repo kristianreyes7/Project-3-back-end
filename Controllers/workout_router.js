@@ -57,7 +57,7 @@ workout.get('/seed', (req, res) => {
 
 
 //create
-workout.post('/new', (req, res) => {
+workout.post('/', (req, res) => {
   Workout_data.create(req.body, (error, newWorkout) => {
     error?
     console.log(error)

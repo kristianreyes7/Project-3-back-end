@@ -4,7 +4,7 @@
   const workoutSchema = new Schema({
     date: {type: String, required: true},
     time: {type: String},
-    target: String,
+    areaTarget: {type: String},
     exercise: {type: String, required: true},
     sets: {type: Number, required: true},
     reps: {type: Number, require: true},
