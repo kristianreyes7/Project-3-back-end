@@ -3,7 +3,7 @@
 
   const workoutSchema = new Schema({
     date: {type: String, required: true},
-    target: {type: String},
+    target: [String],
     exercise: {type: String, required: true},
     meal: [String],
     comments: [String],
