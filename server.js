@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 3003;
 //====Database====//
 const MONGODB_URI = process.env.MONGODB_URI;
 mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,  useUnifiedTopology: true,
+  useNewUrlParser: true,  
+  useUnifiedTopology: true,
   useFindAndModify: false,
 });
 //error / success
@@ -44,15 +45,9 @@ const isAuthenticated = (req, res, next) => {
 }
 
 
-//====Routes====//
-// const recipe_router = require('./routes/recipe_routes.js')
-// app.use('/recipes', isAuthenticated, recipe_router);
-
-// const user_router = require('./routes/users_routes.js')
-// app.use('/users', user_router)
-
-// const sessions_router = require('./routes/sessions_routes.js')
-// app.use('/sessions', sessions_router);
+//====Controllers====//
+const workout_controller = require('./Controllers/workout_router.js');
+app.use('/workout', workout_controller);
 
 //====listener====//
 app.listen(PORT, () => {
