@@ -5,7 +5,7 @@ const workout = express.Router();
 const Workout_data = require('../models/workout_data.js');
 //====routes====//
 //create
-workout.post('/', (req, res) => {
+workout.post('/new', (req, res) => {
   Workout_data.create(req.body, (error, newWorkout) => {
     error?
     console.log(error)

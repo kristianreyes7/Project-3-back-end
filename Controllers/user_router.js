@@ -13,6 +13,7 @@ users.post('/new', (req, res) => {
     res.json(createdUser);
   })
 });
+//return all users 
 users.get('/', (req, res) => {
   User_data.find({}, (error, foundUser) => {
     error? console.log(error)

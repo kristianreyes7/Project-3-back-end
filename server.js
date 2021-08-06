@@ -36,13 +36,7 @@ app.use(
 app.get('/', (req, res) => {
   res.redirect('/workout');
 })
-const isAuthenticated = (req, res, next) => {
-  if (req.session.currentUser) {
-    return next()
-  } else {
-    res.redirect('/sessions/new')
-  }
-}
+
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next()
