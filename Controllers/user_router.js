@@ -5,6 +5,7 @@ const users = express.Router();
 const User_data = require('../models/user.js');
 //====create====//
 users.post('/new', (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
   User_data.create(req.body, (error, createdUser) => {
     error? console.log(error)
     : 
