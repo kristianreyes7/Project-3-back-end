@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt')
 const express = require('express');
 const users = express.Router();
+const jwt = require("jsonwebtoken")
 //===data from schema===//
 const User_data = require('../models/user.js');
 //====create====//
