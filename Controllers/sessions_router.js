@@ -14,7 +14,7 @@ sessions.post('/', (req, res) => {
       res.send('oops the db had a problem')
     } else if (!foundUser) {
       // if found user is undefined/null not found etc
-      res.send('<a  href="/recipes">Sorry, no user found </a>')
+      res.send('<a  href="/workout">Sorry, no user found </a>')
     } else {
       // user is found yay!
       // now let's check if passwords match
@@ -22,7 +22,7 @@ sessions.post('/', (req, res) => {
         // add the user to our session
         req.session.currentUser = foundUser
         // redirect back to our home page
-        res.redirect('/workouts')
+        res.redirect('/workout')
       } else {
         // passwords do not match
         res.send('<a href="/"> password does not match </a>')

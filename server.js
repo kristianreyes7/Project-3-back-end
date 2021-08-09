@@ -36,7 +36,6 @@ app.use(
 app.get('/', (req, res) => {
   res.redirect('/workout');
 })
-
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next()
@@ -44,16 +43,15 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/sessions/new')
   }
 }
-
 //====Controllers====//
 const workout_controller = require('./Controllers/workout_router.js');
-app.use('/workout', workout_controller);
+app.use('/workout', isAuthenticated, workout_controller);
 
 const user_controller = require('./Controllers/user_router.js');
 app.use('/user', user_controller);
 
-const sessions_controller = require('./Controllers/sessions_routes.js')
-app.use('/sessions', sessions_controller);
+const sessions_controller = require('./Controllers/sessions_router.js')
+app.use('/session', sessions_controller);
 
 //====listener====//
 app.listen(PORT, () => {
