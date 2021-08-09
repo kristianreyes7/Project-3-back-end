@@ -2,13 +2,13 @@
   const Schema = mongoose.Schema;
 
   const workoutSchema = new Schema({
-    date: {type: String, required: true},
+    date: {type: String},
     time: {type: String},
-    target: String,
-    exercise: {type: String, required: true},
-    sets: {type: Number, required: true},
-    reps: {type: Number, require: true},
-    weight: {type: Number, require: true},
+    areaTarget: {type: String},
+    exercise: {type: String},
+    sets: {type: Number},
+    reps: {type: Number},
+    weight: {type: Number},
     meal: [String],
     comments: [String],
   })
