@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const db = mongoose.connection;
 const cors = require('cors')
-const session = require('express-session')
+// const session = require('express-session')
 require ('dotenv').config();
 
 //=====PORT====//
@@ -25,13 +25,13 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //====Middleware====//
 app.use(cors());
 app.use(express.json());
-app.use(
-  session({
-    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
-    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
-    saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-sess  ion#resave
-  })
-)
+// app.use(
+//   session({
+//     secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+//     resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+//     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-sess  ion#resave
+//   })
+// )
 
 app.get('/', (req, res) => {
   res.redirect('/workout');
@@ -40,18 +40,15 @@ const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
     return next()
   } else {
-    res.redirect('/sessions/new')
+    res.redirect('/session/login')
   }
 }
 //====Controllers====//
 const workout_controller = require('./Controllers/workout_router.js');
-app.use('/workout', isAuthenticated, workout_controller);
+app.use('/workout', workout_controller);
 
-const user_controller = require('./Controllers/user_router.js');
+const user_controller = require('./Controllers/users.js');
 app.use('/user', user_controller);
-
-const sessions_controller = require('./Controllers/sessions_router.js')
-app.use('/session', sessions_controller);
 
 //====listener====//
 app.listen(PORT, () => {
