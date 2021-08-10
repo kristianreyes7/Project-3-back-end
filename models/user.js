@@ -7,7 +7,7 @@ const userSchema = Schema({
   image: {type: String},
   weight: {type: Number},
   height: {type: Number},
-  workoutscompleted: [{type: String}], 
+  workoutscompleted: [], 
 })
 
 const User = mongoose.model('User', userSchema)
