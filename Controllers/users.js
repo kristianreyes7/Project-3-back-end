@@ -20,6 +20,10 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
       username,
       password: passwordHash,
+      workouts: [],
+      image: "",
+      height: 0,
+      weight: 0
     });
 
     const savedUser = await newUser.save();
@@ -48,7 +52,10 @@ try {
       user: {
       id: user._id,
       username: user.username,
-      workoutscompleted: user.workoutscompleted
+      workouts: user.workouts,
+      image: user.image,
+      height: user.height,
+      weight: user.weight,
       },
   });
 } catch (err) {
@@ -78,6 +85,78 @@ router.post("/tokenIsValid", async (req, res) => {
   res.status(500).json({ error: err.message });
   }
 });
+//ADD TO WORKOUT ARRAY 
+router.post("/:id/:token", (req,res) =>{
+  User.findById(req.params.id, (err,foundUser)=>{
+    if (err){
+      console.log(err)
+    }else{
+      foundUser.workouts.push(req.body)
+      foundUser.save((err, newUser)=>{
+        res.json({
+          token: req.params.token,
+          user: {
+          id: newUser._id,
+          username: newUser.username,
+          workouts: newUser.workouts,
+          image: newUser.image,
+          heigth: newUser.height,
+          weight: newUser.weight,
+          }
+        })
+      })
+    }
+  })
+})
+
+//REMOVE TO WORKOUT ARRAY 
+router.delete("/:userid/:token/:index", (req,res) =>{
+  console.log('im getting here')
+  User.findById(req.params.userid, (err,foundUser)=>{
+    if (err){
+      console.log(err)
+    }else{
+      foundUser.workouts.splice(req.params.index, 1)
+      foundUser.save((err, newUser)=>{
+      res.json({
+          token: req.params.token,
+          user: {
+          id: newUser._id,
+          username: newUser.username,
+          workouts: newUser.workouts,
+          image: newUser.image,
+          heigth: newUser.height,
+          weight: newUser.weight,
+          }
+        })
+      })
+    }
+  })
+})
+// EDIT WORKOUT  
+router.put("/:userid/:token/:index", (req,res) =>{
+  console.log('im getting here')
+  User.findById(req.params.userid, (err,foundUser)=>{
+    if (err){
+      console.log(err)
+    }else{
+      foundUser.workouts[req.params.index] = req.body
+      foundUser.save((err, newUser)=>{
+      res.json({
+          token: req.params.token,
+          user: {
+          id: newUser._id,
+          username: newUser.username,
+          workouts: newUser.workouts,
+          image: newUser.image,
+          heigth: newUser.height,
+          weight: newUser.weight,
+          }
+        })
+      })
+    }
+  })
+})
 
 router.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user);
