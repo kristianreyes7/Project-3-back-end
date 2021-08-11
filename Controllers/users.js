@@ -129,7 +129,7 @@ router.delete("/:userid/:token/:index", (req,res) =>{
           username: newUser.username,
           workouts: newUser.workouts,
           image: newUser.image,
-          heigth: newUser.height,
+          height: newUser.height,
           weight: newUser.weight,
           }
         })
@@ -153,7 +153,7 @@ router.put("/:userid/:token/:index", (req,res) =>{
           username: newUser.username,
           workouts: newUser.workouts,
           image: newUser.image,
-          heigth: newUser.height,
+          height: newUser.height,
           weight: newUser.weight,
           }
         })
