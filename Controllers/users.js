@@ -104,7 +104,7 @@ router.post("/:id/:token", (req,res) =>{
           username: newUser.username,
           workouts: newUser.workouts,
           image: newUser.image,
-          heigth: newUser.height,
+          height: newUser.height,
           weight: newUser.weight,
           }
         })
