@@ -31,7 +31,7 @@ router.post("/register", async (req, res) => {
       token: "",
       user: savedUser
      }
-    res.json(frontEndUser);
+    res.redirect('/workout');
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -91,6 +91,7 @@ router.post("/tokenIsValid", async (req, res) => {
 });
 //ADD TO WORKOUT ARRAY 
 router.post("/:id/:token", (req,res) =>{
+  console.log()
   User.findById(req.params.id, (err,foundUser)=>{
     if (err){
       console.log(err)
