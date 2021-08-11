@@ -27,7 +27,11 @@ router.post("/register", async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-    res.json(savedUser);
+    const frontEndUser = {
+      token: "",
+      user: savedUser
+     }
+    res.json(frontEndUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -150,6 +154,33 @@ router.put("/:userid/:token/:index", (req,res) =>{
           workouts: newUser.workouts,
           image: newUser.image,
           heigth: newUser.height,
+          weight: newUser.weight,
+          }
+        })
+      })
+    }
+  })
+})
+
+// EDIT PROFILE  
+router.put("/:userid/:token", (req,res) =>{
+  console.log('im getting to the route')
+  User.findById(req.params.userid, (err,foundUser)=>{
+    if (err){
+      console.log(err)
+    }else{
+      foundUser.image = req.body.image
+      foundUser.height = req.body.height
+      foundUser.weight = req.body.weight
+      foundUser.save((err, newUser)=>{
+      res.json({
+          token: req.params.token,
+          user: {
+          id: newUser._id,
+          username: newUser.username,
+          workouts: newUser.workouts,
+          image: newUser.image,
+          height: newUser.height,
           weight: newUser.weight,
           }
         })
