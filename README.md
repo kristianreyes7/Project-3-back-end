@@ -1,3 +1,5 @@
+App Link: https://devmuscle.herokuapp.com/
+Front-End: https://github.com/imdoug/workout-app-front-end/tree/dev
 Workout App
 - User should be able to create a profile. post('/user/new')
   - Pw are encrypted and salted with bcrypt
